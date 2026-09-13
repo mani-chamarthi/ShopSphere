@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Product Details | ShopSphere</title>
+    <meta
+      name="description"
+      content="ShopSphere modern demo e-commerce store"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <script>
+      try {
+        if (JSON.parse(localStorage.getItem("shopsphere_theme")) === "dark")
+          document.documentElement.classList.add("pre-dark");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-main">
+        <a class="logo" href="../index.html">Shop<span>Sphere</span></a>
+        <form class="search-wrap global-search">
+          <input
+            id="globalSearch"
+            aria-label="Search products"
+            placeholder="Search products..."
+            autocomplete="off"
+          /><button aria-label="Search">⌕</button>
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="wishlist.html" aria-label="Wishlist"
+            >♡<span id="wishlistCount" class="badge">0</span></a
+          >
+          <a class="icon-btn" href="cart.html" aria-label="Cart"
+            >🛒<span id="cartCount" class="badge">0</span></a
+          >
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            aria-label="Toggle dark mode"
+          >
+            🌙
+          </button>
+          <a
+            class="btn btn-primary btn-sm login-btn user-label"
+            href="login.html"
+            >Login</a
+          >
+          <button id="menuToggle" class="menu-btn" aria-label="Open menu">
+            ☰
+          </button>
+        </div>
+      </div>
+      <nav id="mobileNav" class="mobile-nav container">
+        <a href="../index.html">Home</a><a href="products.html">Products</a
+        ><a href="orders.html">Orders</a><a href="admin.html">Admin</a
+        ><a href="login.html">Login / Register</a>
+      </nav>
+    </header>
+    <main>
+      <div class="container"><div id="productDetail"></div></div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Shop<span>Sphere</span></div>
+          <p style="margin-top: 12px">
+            A polished front-end shopping experience built entirely with HTML,
+            CSS and vanilla JavaScript.
+          </p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <a href="products.html">All Products</a
+          ><a href="products.html?category=Electronics">Electronics</a
+          ><a href="products.html?category=Fashion">Fashion</a
+          ><a href="products.html?category=Books">Books</a>
+        </div>
+        <div>
+          <h3>Account</h3>
+          <a href="wishlist.html">Wishlist</a><a href="cart.html">Cart</a
+          ><a href="orders.html">Orders</a><a href="login.html">Login</a>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <a href="../index.html#benefits">Benefits</a
+          ><a href="../index.html#offers">Offers</a
+          ><a href="admin.html">Demo Admin</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 ShopSphere · Front-end demo only · No real payments are
+        processed.
+      </div>
+    </footer>
+    <script src="../js/products.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+      function renderProductDetail() {
+        const id = new URLSearchParams(location.search).get("id"),
+          p = productById(id),
+          box = $("#productDetail");
+        if (!p) {
+          box.innerHTML =
+            '<div class="empty" style="margin:40px 0"><h2>Product not found</h2><a class="btn btn-primary mt-3" href="products.html">Back to Products</a></div>';
+          return;
+        }
+        trackProductInterest(p.id, "view");
+        box.innerHTML = `<div class="breadcrumbs" style="padding-top:25px"><a href="../index.html">Home</a> / <a href="products.html">Products</a> / ${p.name}</div>
+ <section class="detail"><div class="detail-image"><img src="${assetUrl(p.image)}" alt="${p.name}"></div><div>
+ <div class="eyebrow">${p.category}</div><h1>${p.name}</h1><div class="rating mt-2">★ ${p.rating} · ${p.reviews} reviews</div>
+ <div class="detail-price">${money(p.price)} <span class="old-price">${money(p.originalPrice)}</span> <span class="discount">${p.discount}% off</span></div>
+ <p class="description">${p.description}</p><p><strong>${p.stock}</strong> available</p>
+ <div class="qty mt-3"><button onclick="changeDetailQty(-1)">−</button><span id="detailQty">1</span><button onclick="changeDetailQty(1)">+</button></div>
+ <div class="card-actions"><button class="btn btn-primary" onclick="addToCart(${p.id},Number($('#detailQty').textContent));">Add to Cart</button><button class="btn btn-outline" onclick="toggleWishlist(${p.id});renderProductDetail()">♡ Wishlist</button><button class="btn btn-success" onclick="addToCart(${p.id},Number($('#detailQty').textContent));location.href='checkout.html'">Buy Now</button></div>
+ <div class="specs">${Object.entries(p.specs || {})
+   .map(
+     ([k, v]) =>
+       `<div class="spec-row"><strong>${k}</strong><span>${v}</span></div>`,
+   )
+   .join("")}</div>
+ </div></section>
+ <section class="section"><div class="section-head"><h2>Related Products</h2></div><div class="product-grid">${allProducts()
+   .filter((x) => x.category === p.category && x.id !== p.id)
+   .slice(0, 4)
+   .map(productCard)
+   .join("")}</div></section>`;
+      }
+      function changeDetailQty(delta) {
+        const p = productById(new URLSearchParams(location.search).get("id")),
+          el = $("#detailQty");
+        el.textContent = Math.max(
+          1,
+          Math.min(p.stock, Number(el.textContent) + delta),
+        );
+      }
+      document.addEventListener("DOMContentLoaded", renderProductDetail);
+    </script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../js/auth.js"></script>
+  </body>
+</html>

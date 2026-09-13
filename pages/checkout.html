@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Checkout | ShopSphere</title>
+    <meta
+      name="description"
+      content="ShopSphere modern demo e-commerce store"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <script>
+      try {
+        if (JSON.parse(localStorage.getItem("shopsphere_theme")) === "dark")
+          document.documentElement.classList.add("pre-dark");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-main">
+        <a class="logo" href="../index.html">Shop<span>Sphere</span></a>
+        <form class="search-wrap global-search">
+          <input
+            id="globalSearch"
+            aria-label="Search products"
+            placeholder="Search products..."
+            autocomplete="off"
+          /><button aria-label="Search">⌕</button>
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="wishlist.html" aria-label="Wishlist"
+            >♡<span id="wishlistCount" class="badge">0</span></a
+          >
+          <a class="icon-btn" href="cart.html" aria-label="Cart"
+            >🛒<span id="cartCount" class="badge">0</span></a
+          >
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            aria-label="Toggle dark mode"
+          >
+            🌙
+          </button>
+          <a
+            class="btn btn-primary btn-sm login-btn user-label"
+            href="login.html"
+            >Login</a
+          >
+          <button id="menuToggle" class="menu-btn" aria-label="Open menu">
+            ☰
+          </button>
+        </div>
+      </div>
+      <nav id="mobileNav" class="mobile-nav container">
+        <a href="../index.html">Home</a><a href="products.html">Products</a
+        ><a href="orders.html">Orders</a><a href="admin.html">Admin</a
+        ><a href="login.html">Login / Register</a>
+      </nav>
+    </header>
+    <main>
+      <section class="page-title">
+        <div class="container">
+          <div class="breadcrumbs"><a href="cart.html">Cart</a> / Checkout</div>
+          <h1>Secure Demo Checkout</h1>
+          <p class="muted">
+            This is a simulation. Never enter real payment credentials.
+          </p>
+        </div>
+      </section>
+      <section class="section" style="padding-top: 10px">
+        <div class="container checkout-grid">
+          <form id="checkoutForm" class="form-card">
+            <h2>Delivery Details</h2>
+            <div class="form-grid mt-3">
+              <div class="form-group">
+                <label for="customerName">Full name</label
+                ><input id="customerName" class="input" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number</label
+                ><input id="phone" class="input" type="tel" required />
+              </div>
+              <div class="form-group full">
+                <label for="address">Address</label
+                ><textarea
+                  id="address"
+                  class="input"
+                  rows="4"
+                  required
+                  placeholder="Demo address only"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="delivery">Delivery option</label
+                ><select id="delivery" class="select">
+                  <option>Standard (3–5 days)</option>
+                  <option>Express (1–2 days) · ₹149</option>
+                </select>
+              </div>
+            </div>
+            <h2 class="mt-3">Payment Method</h2>
+            <div class="payment-methods mt-2">
+              <label class="payment-choice active"
+                ><input
+                  type="radio"
+                  name="payment"
+                  value="Cash on Delivery"
+                  checked
+                /><span class="pay-icon">💵</span
+                ><span
+                  ><strong>Cash on Delivery</strong
+                  ><small>Pay when your order arrives</small></span
+                ></label
+              >
+              <label class="payment-choice"
+                ><input type="radio" name="payment" value="UPI" /><span
+                  class="pay-icon"
+                  >📱</span
+                ><span
+                  ><strong>UPI</strong
+                  ><small>Google Pay · PhonePe · Paytm</small></span
+                ></label
+              >
+              <label class="payment-choice"
+                ><input
+                  type="radio"
+                  name="payment"
+                  value="Credit/Debit Card"
+                /><span class="pay-icon">💳</span
+                ><span
+                  ><strong>Credit / Debit Card</strong
+                  ><small>Secure demo card checkout</small></span
+                ></label
+              >
+            </div>
+            <div id="upiPanel" class="payment-panel hide">
+              <div class="upi-apps">
+                <button
+                  type="button"
+                  class="upi-app active"
+                  data-app="Google Pay"
+                >
+                  GPay</button
+                ><button type="button" class="upi-app" data-app="PhonePe">
+                  PhonePe</button
+                ><button type="button" class="upi-app" data-app="Paytm">
+                  Paytm
+                </button>
+              </div>
+              <div class="payment-split">
+                <div>
+                  <label>UPI ID</label>
+                  <div class="inline-field">
+                    <input
+                      id="upiId"
+                      class="input"
+                      placeholder="name@bank"
+                      autocomplete="off"
+                    /><button
+                      type="button"
+                      class="btn btn-outline btn-sm"
+                      id="verifyUpi"
+                    >
+                      Verify
+                    </button>
+                  </div>
+                  <p id="upiStatus" class="payment-status"></p>
+                </div>
+                <div class="demo-qr">
+                  <div class="qr-pattern">▦</div>
+                  <small>Demo QR<br />Scan is simulated</small>
+                </div>
+              </div>
+            </div>
+            <div id="cardPanel" class="payment-panel hide">
+              <div class="secure-strip">
+                🔒 Secure demo checkout · Card details are validated locally and
+                never stored or sent.
+              </div>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Cardholder name</label
+                  ><input
+                    id="cardName"
+                    class="input"
+                    autocomplete="off"
+                    placeholder="Aarav Kumar"
+                  />
+                </div>
+                <div class="form-group full">
+                  <label>Card number</label
+                  ><input
+                    id="cardNumber"
+                    class="input"
+                    inputmode="numeric"
+                    maxlength="19"
+                    autocomplete="off"
+                    placeholder="1234 5678 9012 3456"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Expiry</label
+                  ><input
+                    id="cardExpiry"
+                    class="input"
+                    inputmode="numeric"
+                    maxlength="5"
+                    autocomplete="off"
+                    placeholder="MM/YY"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>CVV</label
+                  ><input
+                    id="cardCvv"
+                    class="input"
+                    inputmode="numeric"
+                    maxlength="4"
+                    autocomplete="off"
+                    placeholder="123"
+                  />
+                </div>
+              </div>
+              <p id="cardStatus" class="payment-status"></p>
+            </div>
+            <div id="paymentAction" class="payment-action">
+              <div>
+                <strong id="payAmountLabel">Amount to pay</strong
+                ><small class="muted"
+                  >Demo payment — no money will be charged.</small
+                >
+              </div>
+              <button type="submit" class="btn btn-primary" id="payButton">
+                Place Demo Order
+              </button>
+            </div>
+          </form>
+          <aside id="checkoutSummary" class="summary"></aside>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Shop<span>Sphere</span></div>
+          <p style="margin-top: 12px">
+            A polished front-end shopping experience built entirely with HTML,
+            CSS and vanilla JavaScript.
+          </p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <a href="products.html">All Products</a
+          ><a href="products.html?category=Electronics">Electronics</a
+          ><a href="products.html?category=Fashion">Fashion</a
+          ><a href="products.html?category=Books">Books</a>
+        </div>
+        <div>
+          <h3>Account</h3>
+          <a href="wishlist.html">Wishlist</a><a href="cart.html">Cart</a
+          ><a href="orders.html">Orders</a><a href="login.html">Login</a>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <a href="../index.html#benefits">Benefits</a
+          ><a href="../index.html#offers">Offers</a
+          ><a href="admin.html">Demo Admin</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 ShopSphere · Front-end demo only · No real payments are
+        processed.
+      </div>
+    </footer>
+    <script src="../js/products.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/checkout.js"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../js/auth.js"></script>
+  </body>
+</html>

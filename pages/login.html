@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Login / Register | ShopSphere</title>
+    <meta
+      name="description"
+      content="ShopSphere modern demo e-commerce store"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <script>
+      try {
+        if (JSON.parse(localStorage.getItem("shopsphere_theme")) === "dark")
+          document.documentElement.classList.add("pre-dark");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-main">
+        <a class="logo" href="../index.html">Shop<span>Sphere</span></a>
+        <form class="search-wrap global-search">
+          <input
+            id="globalSearch"
+            aria-label="Search products"
+            placeholder="Search products..."
+            autocomplete="off"
+          /><button aria-label="Search">⌕</button>
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="wishlist.html" aria-label="Wishlist"
+            >♡<span id="wishlistCount" class="badge">0</span></a
+          >
+          <a class="icon-btn" href="cart.html" aria-label="Cart"
+            >🛒<span id="cartCount" class="badge">0</span></a
+          >
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            aria-label="Toggle dark mode"
+          >
+            🌙
+          </button>
+          <a
+            class="btn btn-primary btn-sm login-btn user-label"
+            href="login.html"
+            >Login</a
+          >
+          <button id="menuToggle" class="menu-btn" aria-label="Open menu">
+            ☰
+          </button>
+        </div>
+      </div>
+      <nav id="mobileNav" class="mobile-nav container">
+        <a href="../index.html">Home</a><a href="products.html">Products</a
+        ><a href="orders.html">Orders</a><a href="admin.html">Admin</a
+        ><a href="login.html">Login / Register</a>
+      </nav>
+    </header>
+    <main>
+      <div class="auth-wrap">
+        <section class="auth-card">
+          <div class="text-center">
+            <div class="eyebrow">Demo account</div>
+            <h1>Welcome to ShopSphere</h1>
+            <p class="muted">
+              Secure-style demo authentication with accounts, sessions and
+              role-based access.
+            </p>
+          </div>
+          <div class="tabs">
+            <button class="active" data-mode="login">Login</button
+            ><button data-mode="register">Register</button>
+          </div>
+          <div id="loginPanel">
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="loginEmail">Email</label
+                ><input
+                  id="loginEmail"
+                  class="input"
+                  type="email"
+                  required
+                  placeholder="demo@example.com"
+                />
+              </div>
+              <div class="form-group">
+                <label for="loginPassword">Password</label
+                ><input
+                  id="loginPassword"
+                  class="input"
+                  type="password"
+                  required
+                  placeholder="Demo password"
+                />
+              </div>
+              <p class="muted" style="font-size: 0.8rem">
+                Passwords are hashed with SHA-256 before being stored locally.
+                This is a browser-only demo, not production authentication.
+              </p>
+              <button class="btn btn-primary" style="width: 100%">Login</button>
+            </form>
+          </div>
+          <div id="registerPanel" class="hide">
+            <form id="registerForm">
+              <div class="form-group">
+                <label for="regName">Name</label
+                ><input id="regName" class="input" required />
+              </div>
+              <div class="form-group">
+                <label for="regEmail">Email</label
+                ><input id="regEmail" class="input" type="email" required />
+              </div>
+              <div class="form-group">
+                <label for="regPassword">Password</label
+                ><input
+                  id="regPassword"
+                  class="input"
+                  type="password"
+                  minlength="8"
+                  required
+                  placeholder="At least 8 characters"
+                /><small class="muted"
+                  >Use 8+ characters with at least one letter and one
+                  number.</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="regPasswordConfirm">Confirm Password</label
+                ><input
+                  id="regPasswordConfirm"
+                  class="input"
+                  type="password"
+                  minlength="8"
+                  required
+                />
+              </div>
+              <button class="btn btn-primary" style="width: 100%">
+                Create Account
+              </button>
+            </form>
+          </div>
+          <div
+            id="activeAccount"
+            class="secure-note hide"
+            style="margin-top: 16px"
+          >
+            You are already signed in. Open your profile from the header.
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Shop<span>Sphere</span></div>
+          <p style="margin-top: 12px">
+            A polished front-end shopping experience built entirely with HTML,
+            CSS and vanilla JavaScript.
+          </p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <a href="products.html">All Products</a
+          ><a href="products.html?category=Electronics">Electronics</a
+          ><a href="products.html?category=Fashion">Fashion</a
+          ><a href="products.html?category=Books">Books</a>
+        </div>
+        <div>
+          <h3>Account</h3>
+          <a href="wishlist.html">Wishlist</a><a href="cart.html">Cart</a
+          ><a href="orders.html">Orders</a><a href="login.html">Login</a>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <a href="../index.html#benefits">Benefits</a
+          ><a href="../index.html#offers">Offers</a
+          ><a href="admin.html">Demo Admin</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 ShopSphere · Front-end demo only · No real payments are
+        processed.
+      </div>
+    </footer>
+    <script src="../js/products.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/auth.js"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

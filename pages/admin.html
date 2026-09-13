@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Admin Dashboard | ShopSphere</title>
+    <meta
+      name="description"
+      content="ShopSphere modern demo e-commerce store"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/dark-mode.css" />
+    <script>
+      try {
+        if (JSON.parse(localStorage.getItem("shopsphere_theme")) === "dark")
+          document.documentElement.classList.add("pre-dark");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-main">
+        <a class="logo" href="../index.html">Shop<span>Sphere</span></a>
+        <form class="search-wrap global-search">
+          <input
+            id="globalSearch"
+            aria-label="Search products"
+            placeholder="Search products..."
+            autocomplete="off"
+          /><button aria-label="Search">⌕</button>
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="wishlist.html" aria-label="Wishlist"
+            >♡<span id="wishlistCount" class="badge">0</span></a
+          >
+          <a class="icon-btn" href="cart.html" aria-label="Cart"
+            >🛒<span id="cartCount" class="badge">0</span></a
+          >
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            aria-label="Toggle dark mode"
+          >
+            🌙
+          </button>
+          <a
+            class="btn btn-primary btn-sm login-btn user-label"
+            href="login.html"
+            >Login</a
+          >
+          <button id="menuToggle" class="menu-btn" aria-label="Open menu">
+            ☰
+          </button>
+        </div>
+      </div>
+      <nav id="mobileNav" class="mobile-nav container">
+        <a href="../index.html">Home</a><a href="products.html">Products</a
+        ><a href="orders.html">Orders</a><a href="admin.html">Admin</a
+        ><a href="login.html">Login / Register</a>
+      </nav>
+    </header>
+    <main>
+      <section class="dashboard">
+        <div class="container">
+          <div class="breadcrumbs">
+            <a href="../index.html">Home</a> / Admin
+          </div>
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Demo control center</div>
+              <h1>Admin Dashboard</h1>
+              <p class="muted">
+                Product and order changes are stored locally in this browser.
+              </p>
+            </div>
+            <button id="addProduct" class="btn btn-primary">
+              ＋ Add Product
+            </button>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <small>Total Products</small><strong id="statProducts">0</strong>
+            </div>
+            <div class="stat">
+              <small>Total Orders</small><strong id="statOrders">0</strong>
+            </div>
+            <div class="stat">
+              <small>Revenue</small><strong id="statRevenue">₹0</strong>
+            </div>
+            <div class="stat">
+              <small>Customers</small><strong id="statCustomers">0</strong>
+            </div>
+          </div>
+          <section class="section">
+            <div class="section-head"><h2>Recent Orders</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recentOrders"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="section">
+            <div class="section-head"><h2>Product Catalog</h2></div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProducts"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <div id="productModal" class="modal-backdrop">
+        <div class="modal">
+          <div class="modal-head">
+            <h2 id="modalTitle">Add Product</h2>
+            <button id="closeModal" class="icon-btn">×</button>
+          </div>
+          <form id="productForm">
+            <input id="editId" type="hidden" />
+            <div class="form-grid">
+              <div class="form-group full">
+                <label for="pName">Name</label
+                ><input id="pName" class="input" required />
+              </div>
+              <div class="form-group">
+                <label for="pCategory">Category</label
+                ><select id="pCategory" class="select">
+                  <option>Electronics</option>
+                  <option>Fashion</option>
+                  <option>Books</option>
+                  <option>Accessories</option>
+                  <option>Home & Living</option>
+                  <option>Sports</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="pStock">Stock</label
+                ><input
+                  id="pStock"
+                  class="input"
+                  type="number"
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="pPrice">Price</label
+                ><input
+                  id="pPrice"
+                  class="input"
+                  type="number"
+                  min="1"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="pOriginal">Original price</label
+                ><input
+                  id="pOriginal"
+                  class="input"
+                  type="number"
+                  min="1"
+                  required
+                />
+              </div>
+              <div class="form-group full">
+                <label for="pDescription">Description</label
+                ><textarea id="pDescription" class="input" rows="3"></textarea>
+              </div>
+            </div>
+            <button
+              class="btn btn-primary"
+              style="width: 100%; margin-top: 10px"
+            >
+              Save Product
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Shop<span>Sphere</span></div>
+          <p style="margin-top: 12px">
+            A polished front-end shopping experience built entirely with HTML,
+            CSS and vanilla JavaScript.
+          </p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <a href="products.html">All Products</a
+          ><a href="products.html?category=Electronics">Electronics</a
+          ><a href="products.html?category=Fashion">Fashion</a
+          ><a href="products.html?category=Books">Books</a>
+        </div>
+        <div>
+          <h3>Account</h3>
+          <a href="wishlist.html">Wishlist</a><a href="cart.html">Cart</a
+          ><a href="orders.html">Orders</a><a href="login.html">Login</a>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <a href="../index.html#benefits">Benefits</a
+          ><a href="../index.html#offers">Offers</a
+          ><a href="admin.html">Demo Admin</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 ShopSphere · Front-end demo only · No real payments are
+        processed.
+      </div>
+    </footer>
+    <script src="../js/products.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/admin.js"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../js/auth.js"></script>
+  </body>
+</html>

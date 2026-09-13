@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Home | ShopSphere</title>
+    <meta
+      name="description"
+      content="ShopSphere modern demo e-commerce store"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
+    <script>
+      try {
+        if (JSON.parse(localStorage.getItem("shopsphere_theme")) === "dark")
+          document.documentElement.classList.add("pre-dark");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container header-main">
+        <a class="logo" href="index.html">Shop<span>Sphere</span></a>
+        <form class="search-wrap global-search">
+          <input
+            id="globalSearch"
+            aria-label="Search products"
+            placeholder="Search products..."
+            autocomplete="off"
+          />
+          <button aria-label="Search">⌕</button>
+        </form>
+        <div class="header-actions">
+          <a class="icon-btn" href="pages/wishlist.html" aria-label="Wishlist"
+            >♡<span id="wishlistCount" class="badge">0</span></a
+          >
+          <a class="icon-btn" href="pages/cart.html" aria-label="Cart"
+            >🛒<span id="cartCount" class="badge">0</span></a
+          >
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            aria-label="Toggle dark mode"
+          >
+            🌙
+          </button>
+          <a
+            class="btn btn-primary btn-sm login-btn user-label"
+            href="pages/login.html"
+            >Login</a
+          >
+          <button id="menuToggle" class="menu-btn" aria-label="Open menu">
+            ☰
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Navigation -->
+      <nav id="mobileNav" class="mobile-nav container">
+        <a href="index.html">Home</a>
+        <a href="pages/products.html">Products</a>
+        <a href="pages/orders.html">Orders</a>
+        <a href="pages/admin.html">Admin</a>
+        <a href="pages/login.html">Login / Register</a>
+      </nav>
+    </header>
+    <main>
+      <!-- Home Section -->
+      <section class="home">
+        <div class="container">
+          <div class="home-card">
+            <div class="eyebrow">New season • Smart shopping</div>
+            <h1>Everything you want, all in one sphere.</h1>
+            <p>
+              Discover curated electronics, fashion, books, accessories, home
+              essentials and sports gear with great demo deals.
+            </p>
+            <a
+              class="btn"
+              style="background: #fff; color: #172554"
+              href="pages/products.html"
+              >Shop Now →</a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Explore</div>
+              <h2>Featured Categories</h2>
+            </div>
+            <a href="pages/products.html" class="muted">View all →</a>
+          </div>
+          <div class="category-grid">
+            <a
+              class="category-card"
+              href="pages/products.html?category=Electronics"
+            >
+              <div class="cat-icon">💻</div>
+              <strong>Electronics</strong>
+            </a>
+            <a
+              class="category-card"
+              href="pages/products.html?category=Fashion"
+            >
+              <div class="cat-icon">👟</div>
+              <strong>Fashion</strong>
+            </a>
+            <a class="category-card" href="pages/products.html?category=Books">
+              <div class="cat-icon">📚</div>
+              <strong>Books</strong>
+            </a>
+            <a
+              class="category-card"
+              href="pages/products.html?category=Accessories"
+            >
+              <div class="cat-icon">🎒</div>
+              <strong>Accessories</strong>
+            </a>
+            <a
+              class="category-card"
+              href="pages/products.html?category=Home%20%26%20Living"
+            >
+              <div class="cat-icon">🏠</div>
+              <strong>Home & Living</strong>
+            </a>
+            <a class="category-card" href="pages/products.html?category=Sports">
+              <div class="cat-icon">⚽</div>
+              <strong>Sports</strong>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="section preference-section">
+        <div class="container">
+          <div class="preference-banner">
+            <div>
+              <div class="eyebrow">Smart recommendations</div>
+              <h2 id="personalizedTitle">Picked for you</h2>
+              <p id="personalizedSummary" class="muted">
+                Tell ShopSphere what you like and your feed will adapt.
+              </p>
+            </div>
+            <button class="btn btn-primary" onclick="openPreferenceModal()">
+              ⚙ Personalize
+            </button>
+          </div>
+          <div id="personalizedGrid" class="product-grid"></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Popular now</div>
+              <h2>Trending Products</h2>
+            </div>
+            <a href="pages/products.html" class="muted">See more →</a>
+          </div>
+          <div id="trendingGrid" class="product-grid"></div>
+        </div>
+      </section>
+      <section class="section" id="offers">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Save more</div>
+              <h2>Special Offers</h2>
+            </div>
+          </div>
+          <div class="offer-grid">
+            <div class="offer">
+              <div class="eyebrow">SHOP10</div>
+              <strong>10% off</strong>
+              <p class="muted">Use SHOP10 on your demo order.</p>
+            </div>
+            <div class="offer">
+              <div class="eyebrow">SAVE200</div>
+              <strong>₹200 off</strong>
+              <p class="muted">Perfect for bigger baskets.</p>
+            </div>
+            <div class="offer">
+              <div class="eyebrow">WELCOME</div>
+              <strong>5% off</strong>
+              <p class="muted">A welcome discount for new shoppers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Top rated</div>
+              <h2>Best Sellers</h2>
+            </div>
+          </div>
+          <div id="bestGrid" class="product-grid"></div>
+        </div>
+      </section>
+      <section class="section" id="benefits">
+        <div class="container">
+          <div class="benefits">
+            <div class="benefit">
+              <strong>🚚 Fast Delivery</strong>
+              <p class="muted">Demo delivery choices at checkout.</p>
+            </div>
+            <div class="benefit">
+              <strong>🔒 Safe Demo Checkout</strong>
+              <p class="muted">No real payment credentials are collected.</p>
+            </div>
+            <div class="benefit">
+              <strong>↩ Easy Returns</strong>
+              <p class="muted">A realistic front-end shopping flow.</p>
+            </div>
+            <div class="benefit">
+              <strong>💬 Helpful Support</strong>
+              <p class="muted">Clear, accessible interface throughout.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="newsletter">
+            <div class="eyebrow">Stay in the loop</div>
+            <h2>Get product drops & offers</h2>
+            <p>Demo newsletter signup — no email is sent.</p>
+            <form
+              onsubmit="
+                event.preventDefault();
+                toast('Thanks! Newsletter signup saved for this demo.');
+              "
+            >
+              <input
+                aria-label="Email"
+                type="email"
+                required
+                placeholder="Your email address"
+              />
+              <button class="btn btn-primary">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="logo">Shop<span>Sphere</span></div>
+          <p style="margin-top: 12px">
+            A polished front-end shopping experience built entirely with HTML,
+            CSS and vanilla JavaScript.
+          </p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <a href="pages/products.html">All Products</a>
+          <a href="pages/products.html?category=Electronics">Electronics</a>
+          <a href="pages/products.html?category=Fashion">Fashion</a>
+          <a href="pages/products.html?category=Books">Books</a>
+        </div>
+        <div>
+          <h3>Account</h3>
+          <a href="pages/wishlist.html">Wishlist</a>
+          <a href="pages/cart.html">Cart</a>
+          <a href="pages/orders.html">Orders</a>
+          <a href="pages/login.html">Login</a>
+        </div>
+        <div>
+          <h3>Support</h3>
+          <a href="index.html#benefits">Benefits</a>
+          <a href="index.html#offers">Offers</a>
+          <a href="pages/admin.html">Demo Admin</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        © 2026 ShopSphere · Front-end demo only · No real payments are
+        processed.
+      </div>
+    </footer>
+    <div id="preferenceModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal preference-modal">
+        <div class="modal-head">
+          <div>
+            <div class="eyebrow">Personalize your feed</div>
+            <h2>What do you like?</h2>
+          </div>
+          <button
+            class="icon-btn"
+            onclick="closePreferenceModal()"
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <p class="muted">
+          These choices stay in this browser and are used only to rank demo
+          products.
+        </p>
+        <div class="pref-group">
+          <strong>Categories</strong>
+          <div class="pref-chips">
+            <label class="pref-chip">
+              <input type="checkbox" value="Electronics" />
+              <span>Electronics</span>
+            </label>
+            <label class="pref-chip">
+              <input type="checkbox" value="Fashion" />
+              <span>Fashion</span>
+            </label>
+            <label class="pref-chip">
+              <input type="checkbox" value="Books" />
+              <span>Books</span>
+            </label>
+            <label class="pref-chip">
+              <input type="checkbox" value="Accessories" />
+              <span>Accessories</span>
+            </label>
+            <label class="pref-chip">
+              <input type="checkbox" value="Home & Living" />
+              <span>Home & Living</span>
+            </label>
+            <label class="pref-chip">
+              <input type="checkbox" value="Sports" />
+              <span>Sports</span>
+            </label>
+          </div>
+        </div>
+        <div class="pref-group">
+          <label for="prefBudget"
+            ><strong>Maximum price</strong>
+            <span id="prefBudgetValue">₹5,000</span></label
+          >
+          <input
+            id="prefBudget"
+            type="range"
+            min="499"
+            max="10000"
+            step="500"
+            value="5000"
+          />
+        </div>
+        <div class="pref-group">
+          <label for="prefRating"
+            ><strong>Minimum rating</strong>
+            <span id="prefRatingValue">Any</span></label
+          >
+          <input
+            id="prefRating"
+            type="range"
+            min="0"
+            max="5"
+            step="0.5"
+            value="0"
+          />
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-outline" onclick="resetPreferences()">
+            Reset
+          </button>
+          <button class="btn btn-primary" onclick="savePreferenceForm()">
+            Show my products
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function savePreferenceForm() {
+        savePreferences({
+          categories: $$("#preferenceModal input[type=checkbox]:checked").map(
+            (x) => x.value,
+          ),
+          maxPrice: Number($("#prefBudget").value),
+          minRating: Number($("#prefRating").value),
+        });
+        closePreferenceModal();
+        renderPersonalized();
+        toast("Your recommendations have been personalized!");
+      }
+      function resetPreferences() {
+        savePreferences(defaultPreferences());
+        openPreferenceModal();
+        renderPersonalized();
+        toast("Your preferences have been reset.");
+      }
+      function renderPersonalized() {
+        const ps = personalizedProducts(6),
+          p = getPreferences();
+        $("#personalizedTitle").textContent =
+          p.categories.length || p.maxPrice !== 5000 || p.minRating
+            ? "Picked for you"
+            : "Recommended from your activity";
+        $("#personalizedSummary").textContent = preferenceSummary();
+        $("#personalizedGrid").innerHTML = ps.map(productCard).join("");
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const ps = allProducts();
+        renderPersonalized();
+        $("#trendingGrid").innerHTML = [...ps]
+          .sort((a, b) => trendingScore(b) - trendingScore(a))
+          .slice(0, 4)
+          .map(productCard)
+          .join("");
+        $("#bestGrid").innerHTML = [...ps]
+          .sort((a, b) => b.rating - b.rating || b.reviews - a.reviews)
+          .slice(0, 4)
+          .map(productCard)
+          .join("");
+        $("#prefBudget")?.addEventListener("input", updatePrefLabels);
+        $("#prefRating")?.addEventListener("input", updatePrefLabels);
+      });
+    </script>
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
