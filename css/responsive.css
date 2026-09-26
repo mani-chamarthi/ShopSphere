@@ -1,191 +1,191 @@
 @media(max-width:1050px) {
     .product-grid {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .category-grid {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .benefits {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .filters {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media(max-width:760px) {
     .header-main {
-        gap: 8px
+        gap: 8px;
     }
 
     .header-main .search-wrap {
         order: 3;
         flex-basis: 100%;
-        max-width: none
+        max-width: none;
     }
 
     .header-main {
         flex-wrap: wrap;
-        padding: 10px 0
+        padding: 10px 0;
     }
 
     .site-header {
-        position: sticky
+        position: sticky;
     }
 
     .header-actions {
-        margin-left: auto
+        margin-left: auto;
     }
 
     .login-btn {
-        display: none
+        display: none;
     }
 
     .menu-btn {
-        display: grid
+        display: grid;
     }
 
     .mobile-nav {
-        padding: 8px 0 14px
+        padding: 8px 0 14px;
     }
 
     .mobile-nav.open {
         display: grid;
-        gap: 8px
+        gap: 8px;
     }
 
     .mobile-nav a {
         padding: 10px;
         border-radius: 9px;
-        background: var(--surface-2)
+        background: var(--surface-2);
     }
 
     .hero {
-        padding: 25px 0
+        padding: 25px 0;
     }
 
     .hero-card {
         padding: 35px 24px;
-        border-radius: 20px
+        border-radius: 20px;
     }
 
     .hero h1 {
-        font-size: 2.5rem
+        font-size: 2.5rem;
     }
 
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px
+        gap: 12px;
     }
 
     .category-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px
+        gap: 10px;
     }
 
     .category-card {
-        padding: 15px 8px
+        padding: 15px 8px;
     }
 
     .cat-icon {
-        font-size: 1.5rem
+        font-size: 1.5rem;
     }
 
     .offer-grid,
     .footer-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .benefits {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .newsletter form {
-        flex-direction: column
+        flex-direction: column;
     }
 
     .filters {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .detail,
     .cart-layout,
     .checkout-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .summary {
-        position: static
+        position: static;
     }
 
     .form-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .form-group.full {
-        grid-column: auto
+        grid-column: auto;
     }
 
     .cart-item {
-        grid-template-columns: 70px 1fr
+        grid-template-columns: 70px 1fr;
     }
 
     .cart-item> :last-child {
-        grid-column: 2
+        grid-column: 2;
     }
 
     .cart-item img {
         width: 70px;
-        height: 70px
+        height: 70px;
     }
 
     .stats {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .page-title h1 {
-        font-size: 1.8rem
+        font-size: 1.8rem;
     }
 }
 
 @media(max-width:430px) {
     .container {
-        width: min(var(--max), calc(100% - 20px))
+        width: min(var(--max), calc(100% - 20px));
     }
 
     .product-grid {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 
     .product-info {
-        padding: 11px
+        padding: 11px;
     }
 
     .card-actions {
-        flex-direction: column
+        flex-direction: column;
     }
 
     .benefits {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .filters {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .category-grid {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .logo {
-        font-size: 1.3rem
+        font-size: 1.3rem;
     }
 
     .icon-btn {
         width: 38px;
-        height: 38px
+        height: 38px;
     }
 }
